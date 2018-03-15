@@ -1,0 +1,44 @@
+<html>
+<head>
+	<title>First AJAX Example</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+	<script type="text/javascript">
+		function updateText() {
+			//GET METHOD IN AJAX USING JAVASCRIPT
+			var current_text = document.getElementById('user_text').value;
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					var response = xhr.responseText;
+					document.getElementById('server_response').value = response;
+				}
+			};
+			xhr.open("GET", "server.php?user_input=" + current_text, true);
+			xhr.send();
+			
+			// POST METHOD IN AJAX USING JAVASCRIPT
+			var current_text = document.getElementById('user_text').value;
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+				if( xhr.readyState == 4 && xhr.status == 200 ) {
+					var response = xhr.responseText;
+					document.getElementById('server_response').value = response;
+				}
+			};
+			xhr.open( "POST" , "server.php" , true );
+			xhr.setRequestHeader( "Content-Type" , "application/x-www-form-urlencoded" );
+			xhr.send( "user_input="+current_text );
+			
+		}
+	</script>
+</head>
+<body>
+	<div>Input Text :
+		<input type="text" id="user_text" onkeyup="updateText()" />
+	</div>
+	<br/>
+	<div>Server Resp. :
+		<input type="text" id="server_response" readonly />
+		<div>
+</body>
+</html>
